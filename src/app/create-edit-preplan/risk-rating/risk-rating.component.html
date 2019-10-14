@@ -1,0 +1,67 @@
+<form>
+  <div class="form-group">
+    <label for="lifeHazard">Life Hazard</label>
+    <select class="custom-select" id="lifeHazard">
+      <option value="1">Low Life Hazard (Less than 25 occupants)</option>
+      <option value="2">Medium Life Hazard (25 - 99 occupants)</option>
+      <option value="3">High Life Hazard (100 or more occupants)</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="buildingUsage">Building Usage</label>
+    <select class="custom-select" id="buildingUsage">
+      <option value="1">Office/Small Business</option>
+      <option value="2">Residential</option>
+      <option value="3">Industrial/High Life Hazard/Large Business</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="communityImpact">Community Impact</label>
+    <select class="custom-select" id="communityImpact">
+      <option value="1">Minor Impact (minor casualty/family loss)</option>
+      <option value="2">Moderate Impact (high casualty/job loss/tax/food store)</option>
+      <option value="3">Severe Impact (irreplaceable/historical/hospital)</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="buildingConstruction">Building Construction</label>
+    <select class="custom-select" id="buildingConstruction">
+      <option value="1">Non-Combustibility</option>
+      <option value="2">Limited Combustibility</option>
+      <option value="3">Combustible</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="hazardIndex">Hazard Index</label>
+    <select class="custom-select" id="hazardIndex">
+      <option value="1">Limited/Common/Residential</option>
+      <option value="2">Simple/Moderate/Business</option>
+      <option value="3">Complex/Multiple/Industrial/Special</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="numberOfStories">Number of Stories</label>
+    <select class="custom-select" if="numberOfStories">
+      <option value="1">Single Story Building</option>
+      <option value="2">2 Story Building</option>
+      <option value="3">3 or more stories (or 40 feet high or more)</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="waterSupply">Water Supply (within 800 feet) - 2 Closest Hydrants #'s </label>
+    <select class="custom-select" id="waterSupply">
+      <option value="1">2 Hydrants at 1000 GPM or over</option>
+      <option value="2">1 at 1000 GPM or over, and 1 less than 1000 GPM</option>
+      <option value="3">0 or 1 Hydrant (with less than 1000 GPM)</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="squareFootage">Square Footage </label>
+    <select class="custom-select" id="squareFootage">
+      <option value="1">7,500 Square Feet or Less</option>
+      <option value="2">7,501 to 14,999 Square Feet</option>
+      <option value="3">15,000 Square Feet or More</option>
+    </select>
+  </div>
+
+</form>
