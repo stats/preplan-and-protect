@@ -1,5 +1,5 @@
 export class Address {
-  
+
   public address:string;
   public address1:string;
   public city:string;
@@ -8,5 +8,7 @@ export class Address {
 
   deserialize(input:any) {
     Object.assign(this, input);
+
+    return this;
   }
 }

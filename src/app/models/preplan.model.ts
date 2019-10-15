@@ -4,7 +4,12 @@ import { FireFlow } from './fireflow.model';
 import { Hazard } from './hazard.model';
 import { Image } from './image.model';
 
+import * as uuid from 'uuid';
+
 export class Preplan {
+
+  public uuid:string;
+
   public name:string;
   public aliases:string[];
   public author:string;
@@ -36,6 +41,18 @@ export class Preplan {
   public hazards:Hazard[];
 
   public images:Image[];
+
+  public created:number;
+  public updated:number;
+
+  public version:number;
+
+  constructor() {
+    this.uuid = uuid.v4();
+    this.created = Date.now();
+    this.updated = Date.now();
+    this.version = 1;
+  }
 
   deserialize(input: any): this {
     Object.assign(this, input);

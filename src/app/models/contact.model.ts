@@ -15,6 +15,8 @@ export class Contact {
 
     this.address = new Address().deserialize(input.address);
     this.phones = input.phones.map(phone => new Phone().deserialize(phone));
+
+    return this;
   }
 
 
