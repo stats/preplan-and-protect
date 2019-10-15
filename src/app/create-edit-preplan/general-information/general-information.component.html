@@ -1,44 +1,42 @@
 <form>
   <div class="form-group">
     <label for="preplanName">Name of Preplan</label>
-    <input type="text" class="form-control" id="preplanName" placeholder="Enter the name for this preplan"/>
+    <input type="text" class="form-control" id="preplanName" name="name" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.name" placeholder="Enter the name for this preplan"/>
   </div>
-  <div class="input-group">
-    <div class="form-group">
-      <label for="alias#">Alias #</label>
-      <input type="text" class="form-control" id="alias#" placeholder="Enter an alias for this preplan"/>
-    </div>
+  <div class="form-group" *ngFor="let alias of preplans.current_preplan?.aliases; let i = index">
+    <label for="alias#">Alias {{i}}</label>
+    <input type="text" class="form-control" id="alias{{i}}" name="alias{{i}}" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.aliases[i]" placeholder="Enter an alias for this preplan"/>
   </div>
   <div class="row">
     <div class="col-lg-12">
-      <button type="button" class="btn btn-outline-secondary float-right">+ add an alias</button>
+      <button type="button" class="btn btn-outline-secondary float-right" (click)="addAlias()">+ add an alias</button>
     </div>
   </div>
   <div class="form-group">
     <label for="author">Author</label>
-    <input type="text" class="form-control" id="author" placeholder="Enter the name of the preplan author"/>
+    <input type="text" class="form-control" id="author" name="author" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.author" placeholder="Enter the name of the preplan author"/>
   </div>
 
   <div class="form-group">
     <label for="address">Address</label>
-    <input type="text" class="form-control" id="address" placeholder="1234 Main Street"/>
+    <input type="text" class="form-control" name="address" id="address" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.address.adress" placeholder="1234 Main Street"/>
   </div>
   <div class="form-group">
     <label for="address2">Address 2</label>
-    <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor"/>
+    <input type="text" class="form-control" id="address2" name="address2" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.address.adress2" placeholder="Apartment, studio, or floor"/>
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="city">City</label>
-      <input type="text" class="form-control" id="city"/>
+      <input type="text" class="form-control" id="city" name="city" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.address.city"/>
     </div>
     <div class="form-group col-md-4">
       <label for="state">State</label>
-      <input type="text" class="form-control" id="state"/>
+      <input type="text" class="form-control" id="state" name="state" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.address.state"/>
     </div>
-    <div class="form-group col-md2">
+    <div class="form-group col-md-2">
       <label for="zipcode">Zipcode</label>
-      <input type="text" class="form-control" id="zipcode"/>
+      <input type="text" class="form-control" id="zipcode" name="zipcode" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.address.city"/>
     </div>
   </div>
 </form>

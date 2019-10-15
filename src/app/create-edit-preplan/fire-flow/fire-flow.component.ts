@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PreplansService } from '../../preplans.service';
 
 @Component({
   selector: 'app-fire-flow',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FireFlowComponent implements OnInit {
 
-  constructor() { }
+  constructor(private preplans:PreplansService) { }
 
   ngOnInit() {
   }

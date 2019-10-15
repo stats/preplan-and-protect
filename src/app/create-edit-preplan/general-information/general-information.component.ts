@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PreplansService } from '../../preplans.service';
 
 @Component({
   selector: 'app-general-information',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneralInformationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private preplans:PreplansService) { }
 
   ngOnInit() {
+  }
+
+  addAlias() {
+    this.preplans.current_preplan.aliases.push("");
   }
 
 }

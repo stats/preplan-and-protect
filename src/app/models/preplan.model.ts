@@ -51,7 +51,12 @@ export class Preplan {
     this.uuid = uuid.v4();
     this.created = Date.now();
     this.updated = Date.now();
-    this.version = 1;
+    this.address = new Address();
+    this.aliases = [];
+    this.fireflows = [];
+    this.hazards = [];
+    this.images = [];
+    this.version = 0;
   }
 
   deserialize(input: any): this {

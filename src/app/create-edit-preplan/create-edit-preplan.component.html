@@ -1,5 +1,5 @@
 <div class="modal fade" id="create-edit-preplan" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{section_title}}</h5>
@@ -13,7 +13,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary mr-auto" *ngIf="current_step !== 0" (click)="back()">Back</button>
         <button type="button" class="btn btn-primary" *ngIf="current_step !== steps.length - 1" (click)="next()">Next</button>
-        <button type="button" class="btn btn-success" *ngIf="current_step == steps.length - 1" (click)="viewReport()">View Report</button>
+        <button type="button" class="btn btn-success" *ngIf="current_step == steps.length - 1" (click)="viewReport()">Save and View Report</button>
     </div>
   </div>
 </div>

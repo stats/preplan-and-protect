@@ -13,8 +13,12 @@ export class PreplansService {
   private showCreateEditSource:Subject<void> = new Subject<void>();
   public toggleCreateEdit$ = this.showCreateEditSource.asObservable();
 
-  public preplan: Preplan;
+  public current_preplan_uuid:string;
   public preplans = {};
+
+  public get current_preplan() {
+    return this.preplans[this.current_preplan_uuid];
+  }
 
   constructor() {
     this.loadPreplans();
@@ -33,7 +37,15 @@ export class PreplansService {
     return this.preplans[uuid];
   }
 
-  savePreplan(preplan) {
+  newPreplan() {
+    let preplan = new Preplan();
+    this.preplans[preplan.uuid] = preplan;
+    this.current_preplan_uuid = preplan.uuid;
+    return this.preplans[preplan.uuid];
+  }
+
+  savePreplan() {
+    let preplan = this.preplans[this.current_preplan_uuid];
     preplan.version = preplan.version + 1;
     preplan.updated = Date.now();
 

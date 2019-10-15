@@ -45,6 +45,9 @@ export class CreateEditPreplanComponent implements OnInit {
     this.showModalRef = this.preplans.toggleCreateEdit$.subscribe(() => {
       if(this.preplans.createEditVisible) {
         $('#create-edit-preplan').modal('show');
+        if(!this.preplans.current_preplan) {
+          this.preplans.newPreplan();
+        }
       } else {
         $('#create-edit-preplan').modal('hide');
       }
@@ -69,6 +72,7 @@ export class CreateEditPreplanComponent implements OnInit {
   private next() {
     this.current_step++;
     this.loadComponent();
+    console.log(this.preplans.current_preplan);
   }
 
   private back() {
@@ -77,7 +81,9 @@ export class CreateEditPreplanComponent implements OnInit {
   }
 
   private viewReport() {
-
+    this.preplans.savePreplan();
+    $('#create-edit-preplan').modal('hide');
+    $('#view-preplan').modal('show');
   }
 
 }
