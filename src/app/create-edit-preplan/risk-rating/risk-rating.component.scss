@@ -1,0 +1,29 @@
+.riskRating {
+  display: inline;
+  border-radius: 5px;
+  border: 5px solid #ccc;
+  padding: 8px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 81px;
+}
+
+.riskRating .number {
+  font-size: 1.5em;
+}
+
+.riskRating .category {
+  font-size: 0.8em;
+}
+
+.riskRatingLow {
+  background-color: YellowGreen ;
+}
+
+.riskRatingMedium {
+  background-color: Gold;
+}
+
+.riskRatingHigh {
+  background-color: IndianRed;
+}

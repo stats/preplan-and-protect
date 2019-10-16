@@ -53,6 +53,7 @@ export class Preplan {
     this.updated = Date.now();
     this.address = new Address();
     this.aliases = [];
+    this.contacts = [];
     this.fireflows = [];
     this.hazards = [];
     this.images = [];
@@ -74,4 +75,13 @@ export class Preplan {
     return this;
   }
 
+  public get riskRating():number {
+    return this.lifeHazard + this.buildingUsage + this.communityImpact + this.buildingConstruction + this.hazardIndex + this.numberOfStories + this.waterSupply + this.squareFootage | 0;
+  }
+
+  public get riskCategory():string {
+    if(this.riskRating < 13) { return "Low" }
+    else if(this.riskRating < 20 ) { return "Medium" }
+    else { return "High" }
+  }
 }

@@ -1,5 +1,5 @@
 export class Phone {
-  public name:string;
+  public type:string;
   public number:string;
 
   deserialize(input:any){

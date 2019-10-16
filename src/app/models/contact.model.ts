@@ -10,6 +10,11 @@ export class Contact {
 
   public address:Address;
 
+  constructor() {
+    this.address = new Address();
+    this.phones = [new Phone()];
+  }
+
   deserialize(input:any) {
     Object.assign(this, input);
 
