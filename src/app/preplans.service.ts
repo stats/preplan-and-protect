@@ -9,9 +9,13 @@ import { Preplan } from './models/preplan.model';
 export class PreplansService {
 
   public createEditVisible:boolean = false;
+  public preplanListVisible:boolean = false;
 
   private showCreateEditSource:Subject<void> = new Subject<void>();
   public toggleCreateEdit$ = this.showCreateEditSource.asObservable();
+
+  private showPreplanListSource:Subject<void> = new Subject<void>();
+  public togglePreplanList$ = this.showPreplanListSource.asObservable();
 
   public current_preplan_uuid:string;
   public preplans = {};
@@ -64,5 +68,15 @@ export class PreplansService {
   hideCreateEdit() {
     this.createEditVisible = false;
     this.showCreateEditSource.next();
+  }
+
+  showPreplansList() {
+    this.preplanListVisible = true;
+    this.showPreplanListSource.next();
+  }
+
+  hidePreplansList() {
+    this.preplanListVisible = false;
+    this.showPreplanListSource.next();
   }
 }
