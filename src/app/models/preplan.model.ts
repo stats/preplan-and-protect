@@ -65,6 +65,8 @@ export class Preplan {
 
     /** May need to map aliases **/
 
+    console.log(input.address);
+
     this.address = new Address().deserialize(input.address);
 
     this.contacts = input.contacts.map(contact => new Contact().deserialize(contact));
@@ -75,6 +77,11 @@ export class Preplan {
     return this;
   }
 
+  public get shortAddress():string {
+    if(!this.address.address && !this.address.address2) return null;
+    return `${this.address.address || ""} ${this.address.address2 || ""}`;
+  }
+
   public get riskRating():number {
     return this.lifeHazard + this.buildingUsage + this.communityImpact + this.buildingConstruction + this.hazardIndex + this.numberOfStories + this.waterSupply + this.squareFootage | 0;
   }
@@ -83,5 +90,10 @@ export class Preplan {
     if(this.riskRating < 13) { return "Low" }
     else if(this.riskRating < 20 ) { return "Medium" }
     else { return "High" }
+  }
+
+  public get shortRiskRating():string {
+    if(this.riskRating == 0) return null;
+    return this.riskRating + ' - ' + this.riskCategory;
   }
 }

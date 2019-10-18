@@ -30,11 +30,15 @@ export class PreplansService {
 
   private loadPreplans() {
     for(let i = 0; i < localStorage.length; i++) {
-      if(localStorage.key(i).substring(0, 5) == 'preplan_') {
-        let preplan = new Preplan().deserialize(localStorage.getItem(localStorage.key(i)));
+      if(localStorage.key(i).substring(0, 8) == 'preplan_') {
+        let preplan = new Preplan().deserialize(JSON.parse(localStorage.getItem(localStorage.key(i))));
         this.preplans[preplan.uuid] = preplan;
       }
     }
+  }
+
+  get preplansSize() {
+    return Object.keys(this.preplans).length || 0;
   }
 
   getPreplan(uuid) {
@@ -58,6 +62,11 @@ export class PreplansService {
     }
 
     localStorage.setItem(`preplan_${preplan.uuid}`, JSON.stringify(preplan));
+  }
+
+  deletePreplan(uuid) {
+    delete this.preplans[uuid];
+    localStorage.removeItem(`preplan_${uuid}`);
   }
 
   showCreateEdit(){
