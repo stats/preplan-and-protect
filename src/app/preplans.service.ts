@@ -41,6 +41,10 @@ export class PreplansService {
     return Object.keys(this.preplans).length || 0;
   }
 
+  setPreplan(uuid) {
+    this.current_preplan_uuid = uuid;
+  }
+
   getPreplan(uuid) {
     return this.preplans[uuid];
   }

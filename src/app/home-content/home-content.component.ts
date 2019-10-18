@@ -13,4 +13,9 @@ export class HomeContentComponent implements OnInit {
   ngOnInit() {
   }
 
+  public createPreplan(){
+    this.preplans.newPreplan();
+    this.preplans.showCreateEdit();
+  }
+
 }

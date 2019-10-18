@@ -29,11 +29,15 @@ export class PreplanListComponent implements OnInit {
   }
 
   viewPreplan(uuid) {
-
+    this.preplans.setPreplan(uuid);
+    $('#preplans-list').modal('hide');
+    $('#view-preplan').modal('show');
   }
 
   editPreplan(uuid) {
-
+    this.preplans.setPreplan(uuid);
+    $('#preplans-list').modal('hide');
+    $('#create-edit-preplan').modal('show');
   }
 
   deletePreplan(uuid) {

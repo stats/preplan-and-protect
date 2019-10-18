@@ -23,15 +23,17 @@
                 <th scope="col">Address</th>
                 <th scope="col">Risk Rating</th>
                 <th scope="col">Author</th>
+                <th scope="col">Version</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let preplan of preplans.preplans | keyvalue">
+              <tr *ngFor="let preplan of preplans.preplans | keyvalue" [ngClass]="preplan.value.version == 0 ? 'table-danger' : ''">
                 <td>{{preplan.value.name || 'No name entered'}}</td>
                 <td>{{preplan.value.shortAddress || 'No address entered'}}</td>
                 <td>{{preplan.value.shortRiskRating || 'No risk rating entered'}}</td>
                 <td>{{preplan.value.author}}</td>
+                <td>{{preplan.value.version == 0 ? 'Not yet saved' : preplan.value.version }}</td>
                 <td class="actions">
                   <i class="fa fa-eye" data-toggle="tooltip" title="View Preplan" (click)="viewPreplan(preplan.key)"></i>
                   <i class="fa fa-pencil" data-toggle="tooltip" title="Edit Preplan" (click)="editPreplan(preplan.key)"></i>
