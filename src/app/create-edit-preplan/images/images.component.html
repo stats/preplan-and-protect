@@ -1,1 +1,28 @@
-<p>images works!</p>
+<form>
+  <fieldset class="border p-2" *ngFor="let hazard of preplans.current_preplan?.images; let i = index">
+    <legend class="w-auto">Image {{i + 1}}</legend>
+    <div class="form-group">
+      <label for="name[{{i}}]">Image Name</label>
+      <input type="text" class="form-control" id="name[{{i}}]" name="name[{{i}}]" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.images[i].name" placeholder="Enter the image name"/>
+    </div>
+    <div class="form-group">
+      <label for="description[{{i}}]">Image Description</label>
+      <textarea class="form-control" id="description[{{i}}]" name="description[{{i}}]" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.images[i].description" placeholder="Enter the imaged description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="tmp_file[{{i}}]">Image File</label>
+      <input type="file" class="form-control-file" id="tmp_file[{{i}}]" name="tmp_file[{{i}}]" (change)="previewImage($event, i)">
+    </div>
+    <div class="row">
+      <div class="col-lg-12 preview">
+        <img src="" class="img-fluid" alt="image preview" id="image_preview_{{i}}">
+        <canvas class="preview-canvas" id="canvas_preview_{{i}}"></canvas>
+      </div>
+    </div>
+  </fieldset>
+  <div class="row">
+    <div class="col-lg-12">
+      <button type="button" class="btn btn-outline-secondary float-right" (click)="addImage()">+ add an image</button>
+    </div>
+  </div>
+</form>
