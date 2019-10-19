@@ -1,1 +1,18 @@
-<p>hazards works!</p>
+<form>
+  <fieldset class="border p-2" *ngFor="let hazard of preplans.current_preplan?.hazards; let i = index">
+    <legend class="w-auto">Hazard {{i + 1}}</legend>
+    <div class="form-group">
+      <label for="type[{{i}}]">Type of Hazard</label>
+      <input type="text" class="form-control" id="type[{{i}}]" name="type[{{i}}]" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.hazards[i].type" placeholder="Enter the hazard type"/>
+    </div>
+    <div class="form-group">
+      <label for="description[{{i}}]">Description of Hazard</label>
+      <textarea class="form-control" id="description[{{i}}]" name="description[{{i}}]" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.hazards[i].description" placeholder="Enter the hazard description"></textarea>
+    </div>
+  </fieldset>
+  <div class="row">
+    <div class="col-lg-12">
+      <button type="button" class="btn btn-outline-secondary float-right" (click)="addHazard()">+ add a hazard</button>
+    </div>
+  </div>
+</form>

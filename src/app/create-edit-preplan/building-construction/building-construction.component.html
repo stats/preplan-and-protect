@@ -1,1 +1,34 @@
-<p>building-construction works!</p>
+<form>
+  <div class="form-group">
+    <label for="constructionType">Construction Type</label>
+    <input type="text" class="form-control" id="constructionType" name="constructionType" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.constructionType" placeholder="Enter the type of construction for this occupancy"/>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="floorTruss" name="floorTruss" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.floorTruss">
+    <label class="form-check-label" for="floorTruss">Truss Floors</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="roofTruss" name="roofTruss" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.roofTruss"/>
+    <label class="form-check-label" for="roofTruss">Truss Roofs</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="sprinklers" name="sprinklers" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.sprinklers"/>
+    <label class="form-check-label" for="sprinklers">Sprinklers</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="standpipe" name="standpipe" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.standpipe"/>
+    <label class="form-check-label" for="standpipe">Standpipes</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="elevators" name="elevators" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.elevators"/>
+    <label class="form-check-label" for="elevators">Elevators</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="keybox" name="keybox" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.keybox"/>
+    <label class="form-check-label" for="keybox">Keybox</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="floorTruss" name="openshaftway" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.openshaftway"/>
+    <label class="form-check-label" for="openshaftway">Open Shaftways</label>
+  </div>
+</form>
