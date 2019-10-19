@@ -16,6 +16,7 @@ import { HazardsComponent } from './create-edit-preplan/hazards/hazards.componen
 import { ImagesComponent } from './create-edit-preplan/images/images.component';
 import { ViewPreplanComponent } from './view-preplan/view-preplan.component';
 import { PreplanListComponent } from './preplan-list/preplan-list.component';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { PreplanListComponent } from './preplan-list/preplan-list.component';
     HazardsComponent,
     ImagesComponent,
     ViewPreplanComponent,
-    PreplanListComponent
+    PreplanListComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

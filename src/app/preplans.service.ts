@@ -43,6 +43,7 @@ export class PreplansService {
 
   setPreplan(uuid) {
     this.current_preplan_uuid = uuid;
+    console.log(this.current_preplan);
   }
 
   getPreplan(uuid) {
@@ -57,8 +58,6 @@ export class PreplansService {
   }
 
   savePreplan() {
-
-
     let preplan = this.preplans[this.current_preplan_uuid];
     preplan.version = preplan.version + 1;
     preplan.updated = Date.now();
@@ -66,12 +65,6 @@ export class PreplansService {
     if(!this.preplans[preplan.uuid]) {
       this.preplans[preplan.uuid] = preplan;
     }
-
-    // for(let image of preplan.images) {
-    //   if(image.tmp_file) {
-    //     console.log(image.tmp_file);
-    //   }
-    // }
 
     localStorage.setItem(`preplan_${preplan.uuid}`, JSON.stringify(preplan));
   }

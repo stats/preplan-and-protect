@@ -18,11 +18,11 @@ export class ImagesComponent implements OnInit {
     this.preplans.current_preplan.images.push(new Image());
   }
 
-  storeImage(index) {
-    let imgCanvas = document.getElementById('canvas_preview_' + index);
+  storeImage(index, img) {
+    let imgCanvas = document.createElement("canvas");
     let imgContext = imgCanvas.getContext("2d");
 
-    let img = document.getElementById('image_preview_' + index);
+    console.log(img, img.width, img.height);
 
     imgCanvas.width = (img.width);
     imgCanvas.height = (img.height);
@@ -34,12 +34,13 @@ export class ImagesComponent implements OnInit {
 
   previewImage(event, index){
     let input = event.target;
+    let img = document.createElement("img");
     if(input.files && input.files[0]){
       console.log('We have an image');
       let reader = new FileReader();
       reader.onload = (e) => {
-        this.storeImage(index);
-        $('#image_preview_' + index).attr('src', e.target.result);
+        img.src = e.target.result;
+        this.storeImage(index, img);
       }
       reader.readAsDataURL(input.files[0]);
     }

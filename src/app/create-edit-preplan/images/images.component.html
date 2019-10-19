@@ -15,7 +15,7 @@
     </div>
     <div class="row">
       <div class="col-lg-12 preview">
-        <img src="" class="img-fluid" alt="image preview" id="image_preview_{{i}}">
+        <img [src]="preplans.current_preplan.images[i].data | safeHtml" class="img-fluid" alt="image preview" id="image_preview_{{i}}">
         <canvas class="preview-canvas" id="canvas_preview_{{i}}"></canvas>
       </div>
     </div>

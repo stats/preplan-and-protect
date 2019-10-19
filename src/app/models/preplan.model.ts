@@ -63,10 +63,6 @@ export class Preplan {
   deserialize(input: any): this {
     Object.assign(this, input);
 
-    /** May need to map aliases **/
-
-    console.log(input.address);
-
     this.address = new Address().deserialize(input.address);
 
     this.contacts = input.contacts.map(contact => new Contact().deserialize(contact));
