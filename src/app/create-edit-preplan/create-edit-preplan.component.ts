@@ -23,7 +23,7 @@ export class CreateEditPreplanComponent implements OnInit {
 
   private showModalRef:Subscription = null;
 
-  private steps:any[] = [
+  public steps:any[] = [
     {title: 'General Information', content: GeneralInformationComponent},
     {title: 'Risk Rating', content: RiskRatingComponent},
     {title: 'Contacts', content: ContactsComponent},
@@ -33,7 +33,7 @@ export class CreateEditPreplanComponent implements OnInit {
     {title: 'Images', content: ImagesComponent}
   ];
 
-  private current_step = 0;
+  public current_step = 0;
 
   public section_title;
 
@@ -69,10 +69,14 @@ export class CreateEditPreplanComponent implements OnInit {
     const componentRef = viewContainerRef.createComponent(componentFactory);
   }
 
+  setStep(index) {
+    this.current_step = index;
+    this.loadComponent();
+  }
+
   private next() {
     this.current_step++;
     this.loadComponent();
-    console.log(this.preplans.current_preplan);
   }
 
   private back() {

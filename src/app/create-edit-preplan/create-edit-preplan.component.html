@@ -8,12 +8,15 @@
         </button>
       </div>
       <div class="modal-body">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item" *ngFor="let step of steps; let i = index;"><a class="nav-link" [ngClass]="current_step == i ? 'active' : ''" role="tab" href="javascript:void(0)" [attr.aria-selected]="current_step == i ? 'true' : 'false'" (click)="setStep(i)">{{step.title}}</a></li>
+        </ul>
         <ng-template section-content></ng-template>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary mr-auto" *ngIf="current_step !== 0" (click)="back()">Back</button>
-        <button type="button" class="btn btn-primary" *ngIf="current_step !== steps.length - 1" (click)="next()">Next</button>
-        <button type="button" class="btn btn-success" *ngIf="current_step == steps.length - 1" (click)="viewReport()">Save and View Preplan</button>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-primary" [disabled]="current_step == 0" (click)="back()">Back</button>
+        <button type="button" class="btn btn-success" (click)="viewReport()">Save and View Preplan</button>
+        <button type="button" class="btn btn-primary"[disabled]="current_step == steps.length - 1" (click)="next()">Next</button>
     </div>
   </div>
 </div>
