@@ -22,14 +22,12 @@ export class ImagesComponent implements OnInit {
     let imgCanvas = document.createElement("canvas");
     let imgContext = imgCanvas.getContext("2d");
 
-    console.log(img, img.width, img.height);
+    imgCanvas.width = img.width;
+    imgCanvas.height = img.height;
 
-    imgCanvas.width = (img.width);
-    imgCanvas.height = (img.height);
+    imgContext.drawImage(img, 0, 0, img.width, img.height);
 
-    imgContext.drawImage(img, 0, 0, img.width, img.heigh);
-
-    this.preplans.current_preplan.images[index].data = imgCanvas.toDataURL("image/png");
+    this.preplans.current_preplan.images[index].data = imgCanvas.toDataURL("image/png", 0.5);
   }
 
   previewImage(event, index){
@@ -39,8 +37,10 @@ export class ImagesComponent implements OnInit {
       console.log('We have an image');
       let reader = new FileReader();
       reader.onload = (e) => {
+        img.onload = () => {
+          this.storeImage(index, img);
+        }
         img.src = e.target.result;
-        this.storeImage(index, img);
       }
       reader.readAsDataURL(input.files[0]);
     }
