@@ -37,9 +37,33 @@ export class PreplansService {
       if(localStorage.key(i).substring(0, 8) == 'preplan_') {
         let preplan = new Preplan().deserialize(JSON.parse(localStorage.getItem(localStorage.key(i))));
         this.preplans[preplan.uuid] = preplan;
+        for(let image of preplan.images) {
+          this.cache_image(image.dexie_id).then(result => {
+            console.log('Cache Complete', result);
+          });
+        }
       }
     }
   }
+
+  async cache_image(id) {
+    let image = await DB.images.get(id);
+    this.image_cache[id] = image.data;
+    return id;
+  }
+
+  getImage(id) {
+    return this.image_cache[id];
+  }
+
+
+  // async getImage(id) {
+  //   if(this.image_cache[id]) return this.image_cache[id];
+  //   console.log(id, this.image_cache[id]);
+  //   let image = await DB.images.get(id)
+  //   this.image_cache[id] = image.data;
+  //   return this.image_cache[id];
+  // }
 
   get preplansSize() {
     return Object.keys(this.preplans).length || 0;
@@ -98,11 +122,4 @@ export class PreplansService {
     this.showPreplanListSource.next();
   }
 
-  async getImage(id) {
-    if(this.image_cache[id]) return this.image_cache[id];
-    console.log(id, this.image_cache[id]);
-    let image = await DB.images.get(id)
-    this.image_cache[id] = image.data;
-    return this.image_cache[id];
-  }
 }

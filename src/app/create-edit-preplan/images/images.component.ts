@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { PreplansService } from '../../preplans.service';
 import { Image } from '../../models/image.model';
 import DB from '../../mydatabase';
@@ -8,13 +8,22 @@ import DB from '../../mydatabase';
   templateUrl: './images.component.html',
   styleUrls: ['./images.component.scss']
 })
-export class ImagesComponent implements OnInit {
+export class ImagesComponent implements OnInit, AfterViewInit {
 
   constructor(private preplans:PreplansService) {
 
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    for(let index in this.preplans.current_preplan.images) {
+      let image = this.preplans.current_preplan.images[index];
+      if(image && image.dexie_id) {
+        $('#image_preview_' + index).attr('src', this.preplans.getImage(image.dexie_id));
+      }
+    }
   }
 
   addImage() {
@@ -30,10 +39,12 @@ export class ImagesComponent implements OnInit {
 
     imgContext.drawImage(img, 0, 0, img.width, img.height);
 
-    var id = await DB.images.put({data: imgCanvas.toDataURL("image/png", 0.5)});
+    let data = imgCanvas.toDataURL("image/png", 0.5);
 
+    var id = await DB.images.put({data: data});
     this.preplans.current_preplan.images[index].dexie_id = id;
-    //this.preplans.current_preplan.images[index].data = imgCanvas.toDataURL("image/png", 0.5);
+
+    $('#image_preview_' + index).attr('src', data);
   }
 
   previewImage(event, index){
