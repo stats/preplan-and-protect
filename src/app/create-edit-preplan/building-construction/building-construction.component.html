@@ -24,8 +24,16 @@
     <label class="form-check-label" for="elevators">Elevators</label>
   </div>
   <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="elevatorsFireService" name="elevatorsFireService" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.elevatorsFireService"/>
+    <label class="form-check-label" for="elevatorsFireService">Elevators Fire Service</label>
+  </div>
+  <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="keybox" name="keybox" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.keybox"/>
     <label class="form-check-label" for="keybox">Keybox</label>
+  </div>
+  <div class="form-group">
+    <label for="keyboxLocation">Keybox Location</label>
+    <input type="text" class="form-control" id="keyboxLocation" name="keyboxLocation" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.keyboxLocation" placeholder="Enter the location of the keybox"/>
   </div>
   <div class="form-check">
     <input class="form-check-input" type="checkbox" value="" id="floorTruss" name="openshaftway" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.openshaftway"/>

@@ -5,7 +5,8 @@
   padding: 8px;
   font-weight: bold;
   text-align: center;
-  min-width: 81px;
+  min-width: 90px;
+  color: white;
 }
 
 .riskRating .number {
@@ -17,13 +18,13 @@
 }
 
 .riskRatingLow {
-  background-color: YellowGreen ;
+  background-color: #28a745 ;
 }
 
 .riskRatingMedium {
-  background-color: Gold;
+  background-color: #ffc107;
 }
 
 .riskRatingHigh {
-  background-color: IndianRed;
+  background-color: #dc3545;
 }

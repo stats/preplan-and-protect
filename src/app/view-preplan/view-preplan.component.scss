@@ -6,3 +6,38 @@
 .modal-dialog, .modal-content {
   min-height: 93vh;
 }
+
+.riskRating {
+  display: inline;
+  border-radius: 5px;
+  border: 5px solid #ccc;
+  padding: 8px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 90px;
+  color: white;
+}
+
+.riskRating .number {
+  font-size: 1.5em;
+}
+
+.riskRating .category {
+  font-size: 0.8em;
+}
+
+.riskRatingLow {
+  background-color: #28a745 ;
+}
+
+.riskRatingMedium {
+  background-color: #ffc107;
+}
+
+.riskRatingHigh {
+  background-color: #dc3545;
+}
+
+.form-check-input:disabled~.form-check-label {
+  color: #212529;  
+}

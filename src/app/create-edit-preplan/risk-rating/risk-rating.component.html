@@ -66,6 +66,7 @@
 
   <div class="d-flex flex-row justify-content-center">
     <div class="riskRating riskRating{{preplans.current_preplan?.riskCategory}}" *ngIf="preplans.current_preplan && preplans.current_preplan.riskRating != 0">
+      <div class="category">Risk Rating</div>
       <div class="number">{{preplans.current_preplan?.riskRating}}</div>
       <div class="category">{{preplans.current_preplan?.riskCategory}}</div>
     </div>

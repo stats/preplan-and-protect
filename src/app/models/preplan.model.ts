@@ -33,7 +33,9 @@ export class Preplan {
   public sprinklers:boolean;
   public standpipe:boolean;
   public elevators:boolean;
+  public elevatorsFireService:boolean;
   public keybox:boolean;
+  public keyboxLocation:string;
   public openshaftway:boolean;
 
   public fireflows:FireFlow[];
@@ -91,5 +93,10 @@ export class Preplan {
   public get shortRiskRating():string {
     if(this.riskRating == 0) return null;
     return this.riskRating + ' - ' + this.riskCategory;
+  }
+
+  public get allAliases():string {
+    if(this.aliases.length == 0 ) return null;
+    return this.aliases.join(", ");
   }
 }
