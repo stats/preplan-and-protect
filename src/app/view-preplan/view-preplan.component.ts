@@ -27,23 +27,6 @@ export class ViewPreplanComponent implements OnInit {
   }
 
   createPDF() {
-    // window["html2canvas"] = html2canvas;
-    // let pdf = new jsPDF('p', 'pt', 'letter');
-    //
-    // //let source = $('#view-content')[0];
-    // //
-    //
-    // pdf.html(document.getElementById('view-content'), {maging: 0.5, callback: (pdf2) => {
-    //   pdf2.save('Test.pdf');
-    // }});
-
-    // html2pdf(document.getElementById('view-content'), {
-    //   margin: 0.25,
-    //   filename: 'test.pdf',
-    //   jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-    //   pagebreak: { mode: ['avoid-all', 'css', 'legacy']}
-    // });
-
     html2pdf().from(document.getElementById('view-content')).set({
       margin: [0.25, 0.25, 0.4, 0.25],
       filename: 'test.pdf',
@@ -67,24 +50,6 @@ export class ViewPreplanComponent implements OnInit {
         pdf.text('Page ' + i + ' of ' + totalPages, 4, 10.70);
       }
     }).save();
-
-    // let margins = {
-    //   top: 36,
-    //   bottom: 36,
-    //   left: 36,
-    //   width: 540
-    // };
-    //
-    // pdf.fromHTML(
-    //   source,
-    //   margins.left,
-    //   margins.top, {
-    //     'width': margins.width,
-    //   },
-    //   (dispose) => {
-    //     pdf.save('Test.pdf');
-    //   }, margins
-    // );
   }
 
 }
