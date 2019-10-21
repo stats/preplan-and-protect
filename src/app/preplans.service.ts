@@ -3,6 +3,8 @@ import { Subject } from 'rxjs';
 
 import { Preplan } from './models/preplan.model';
 
+import DB from './mydatabase';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +21,8 @@ export class PreplansService {
 
   public current_preplan_uuid:string;
   public preplans = {};
+
+  public image_cache = {};
 
   public get current_preplan() {
     return this.preplans[this.current_preplan_uuid];
@@ -92,5 +96,13 @@ export class PreplansService {
   hidePreplansList() {
     this.preplanListVisible = false;
     this.showPreplanListSource.next();
+  }
+
+  async getImage(id) {
+    if(this.image_cache[id]) return this.image_cache[id];
+    console.log(id, this.image_cache[id]);
+    let image = await DB.images.get(id)
+    this.image_cache[id] = image.data;
+    return this.image_cache[id];
   }
 }

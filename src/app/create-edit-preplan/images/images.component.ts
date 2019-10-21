@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PreplansService } from '../../preplans.service';
 import { Image } from '../../models/image.model';
+import DB from '../../mydatabase';
 
 @Component({
   selector: 'app-images',
@@ -9,7 +10,9 @@ import { Image } from '../../models/image.model';
 })
 export class ImagesComponent implements OnInit {
 
-  constructor(private preplans:PreplansService) { }
+  constructor(private preplans:PreplansService) {
+
+  }
 
   ngOnInit() {
   }
@@ -18,7 +21,7 @@ export class ImagesComponent implements OnInit {
     this.preplans.current_preplan.images.push(new Image());
   }
 
-  storeImage(index, img) {
+  async storeImage(index, img) {
     let imgCanvas = document.createElement("canvas");
     let imgContext = imgCanvas.getContext("2d");
 
@@ -27,7 +30,10 @@ export class ImagesComponent implements OnInit {
 
     imgContext.drawImage(img, 0, 0, img.width, img.height);
 
-    this.preplans.current_preplan.images[index].data = imgCanvas.toDataURL("image/png", 0.5);
+    var id = await DB.images.put({data: imgCanvas.toDataURL("image/png", 0.5)});
+
+    this.preplans.current_preplan.images[index].dexie_id = id;
+    //this.preplans.current_preplan.images[index].data = imgCanvas.toDataURL("image/png", 0.5);
   }
 
   previewImage(event, index){
@@ -40,7 +46,7 @@ export class ImagesComponent implements OnInit {
         img.onload = () => {
           this.storeImage(index, img);
         }
-        img.src = e.target.result;
+        img.src = reader.result as string;
       }
       reader.readAsDataURL(input.files[0]);
     }
