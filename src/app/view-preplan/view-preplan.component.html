@@ -1,17 +1,95 @@
 <div class="modal fade" data-keyboard="false" data-backdrop="static" id="view-preplan" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{preplans.current_preplan?.name}}</h5>
+        <h5 class="modal-title">{{preplan?.name}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <ng-template section-content></ng-template>
-      </div>
-      <div class="modal-footer">
+        <div>
+          {{preplan?.name}}
+        </div>
+        <div *ngFor="let alias of preplan?.aliases">
+          {{alias}}
+        </div>
+        <div>
+          {{preplan?.author}}
+        </div>
+        <div>
+          {{preplan?.address.address}}
+          {{preplan?.address.address1}}
+          {{preplan?.address.city}}
+          {{preplan?.address.state}}
+          {{preplan?.address.zipcode}}
+        </div>
+        <div>
+          {{preplan?.shortRiskRating}}
+        </div>
+        <div *ngFor="let contact of preplan?.contacts">
+          {{contact.name}}
+          {{contact.email}}
+          <div *ngFor="let phone of contact.phones">
+            {{phone.type}} {{phone.number}}
+          </div>
+          <div>
+            {{contact.address.address}}
+            {{contact.address.address1}}
+            {{contact.address.city}}
+            {{contact.address.state}}
+            {{contact.address.zipcode}}
+          </div>
+        </div>
+        {{preplan?.constructionType}}
+        {{preplan?.floorTruss}}
+        {{preplan?.roofTruss}}
+        {{preplan?.sprinklers}}
+        {{preplan?.standpipe}}
+        {{preplan?.elevators}}
+        {{preplan?.keybox}}
+        {{preplan?.openshaftway}}
 
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Percent Involvement</th>
+              <th scope="col">25%</th>
+              <th scope="col">50%</th>
+              <th scope="col">75%</th>
+              <th scope="col">100%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let flow of preplan?.fireflows">
+              <td>{{flow.name}}</td>
+              <td>{{ (flow.squareFootage / 3) * 0.25 | number: '1.0-0'}} GPM</td>
+              <td>{{ (flow.squareFootage / 3) * 0.50 | number: '1.0-0'}} GPM</td>
+              <td>{{ (flow.squareFootage / 3) * 0.75 | number: '1.0-0'}} GPM</td>
+              <td>{{ (flow.squareFootage / 3) | number: '1.0-0'}} GPM</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngFor="let hazard of preplan?.hazards">
+          {{hazard.type}}
+          {{hazard.description}}
+        </div>
+
+        <div *ngFor="let image of preplan?.images">
+          {{image.name}}
+          {{image.description}}
+          <img [src]="preplans.getImage(image.dexie_id)">
+        </div>
+
+        {{preplan?.created}}
+        {{preplan?.updated}}
+        {{preplan?.version}}
+
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-primary" (click)="downloadPDF(preplan?.uuid)">Download PDF</button>
+      </div>
     </div>
   </div>
 </div>

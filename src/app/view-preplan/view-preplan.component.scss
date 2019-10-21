@@ -2,3 +2,7 @@
   width: 90% !important;
   max-width: 90% !important;
 }
+
+.modal-dialog, .modal-content {
+  min-height: 93vh;
+}

@@ -17,4 +17,8 @@ export class GeneralInformationComponent implements OnInit {
     this.preplans.current_preplan.aliases.push("");
   }
 
+  trackByFn(index: any, item: any) {
+    return index;
+  }
+
 }

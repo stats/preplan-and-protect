@@ -8,7 +8,15 @@ import { PreplansService } from '../preplans.service';
 })
 export class ViewPreplanComponent implements OnInit {
 
-  constructor(private preplans:PreplansService) { }
+  preplan:any;
+
+  constructor(private preplans:PreplansService) {
+    this.preplan = this.preplans.current_preplan;
+
+    this.preplans.preplanChange$.subscribe(() => {
+      this.preplan = this.preplans.current_preplan;
+    })
+  }
 
   ngOnInit() {
   }

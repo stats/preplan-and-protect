@@ -3,6 +3,10 @@
   max-width: 90% !important;
 }
 
+.modal-dialog, .modal-content {
+  min-height: 93vh;
+}
+
 .actions i {
   margin-right: 8px;
 }

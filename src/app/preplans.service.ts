@@ -19,6 +19,9 @@ export class PreplansService {
   private showPreplanListSource:Subject<void> = new Subject<void>();
   public togglePreplanList$ = this.showPreplanListSource.asObservable();
 
+  private preplanChangeSource:Subject<void> = new Subject<void>();
+  public preplanChange$ = this.preplanChangeSource.asObservable();
+
   public current_preplan_uuid:string;
   public preplans = {};
 
@@ -71,6 +74,7 @@ export class PreplansService {
 
   setPreplan(uuid) {
     this.current_preplan_uuid = uuid;
+    this.preplanChangeSource.next();
     console.log(this.current_preplan);
   }
 
