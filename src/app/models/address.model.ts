@@ -13,6 +13,6 @@ export class Address {
   }
 
   public get anyComponents():boolean {
-    return this.address || this.address2 || this.city || this.state || this.zipcode;
+    return  !this.address && !this.address2 && !this.city && !this.state && !this.zipcode;
   }
 }
