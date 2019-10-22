@@ -18,6 +18,8 @@ import { ViewPreplanComponent } from './view-preplan/view-preplan.component';
 import { PreplanListComponent } from './preplan-list/preplan-list.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
 import { RestoreComponent } from './restore/restore.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { RestoreComponent } from './restore/restore.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent],
