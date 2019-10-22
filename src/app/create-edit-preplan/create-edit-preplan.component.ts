@@ -62,17 +62,17 @@ export class CreateEditPreplanComponent implements OnInit {
     this.loadComponent();
   }
 
-  private next() {
+  public next() {
     this.current_step++;
     this.loadComponent();
   }
 
-  private back() {
+  public back() {
     this.current_step--;
     this.loadComponent();
   }
 
-  private viewReport() {
+  public viewReport() {
     this.preplans.savePreplan();
     this.preplans.showViewPreplan();
   }
