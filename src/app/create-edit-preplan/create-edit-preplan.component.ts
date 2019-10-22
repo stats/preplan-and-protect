@@ -1,6 +1,5 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { PreplansService } from '../preplans.service';
-import { Subscription } from 'rxjs';
 
 import { SectionContentDirective } from '../section-content.directive';
 
@@ -20,8 +19,6 @@ declare var $: any;
   styleUrls: ['./create-edit-preplan.component.scss']
 })
 export class CreateEditPreplanComponent implements OnInit {
-
-  private showModalRef:Subscription = null;
 
   public steps:any[] = [
     {title: 'General Information', content: GeneralInformationComponent},

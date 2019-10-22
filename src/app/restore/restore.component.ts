@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PreplansService } from '../preplans.service';
-import swal from 'sweetalert2';
+import swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-restore',

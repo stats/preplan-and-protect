@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PreplansService } from '../preplans.service';
-import { Subscription } from 'rxjs';
 
-import swal from 'sweetalert2';
+import swal from 'sweetalert2/dist/sweetalert2.js';
 
 declare var $: any;
 
@@ -12,8 +11,6 @@ declare var $: any;
   styleUrls: ['./preplan-list.component.scss']
 })
 export class PreplanListComponent implements OnInit {
-
-  private showModalRef:Subscription = null;
 
   constructor(public preplans:PreplansService) {
   }

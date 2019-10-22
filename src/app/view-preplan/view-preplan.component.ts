@@ -10,14 +10,11 @@ declare var html2pdf:any;
 })
 export class ViewPreplanComponent implements OnInit {
 
-  preplan:any;
 
-  constructor(public preplans:PreplansService) {
-    this.preplan = this.preplans.current_preplan;
+  constructor(public preplans:PreplansService) { }
 
-    this.preplans.preplanChange$.subscribe(() => {
-      this.preplan = this.preplans.current_preplan;
-    })
+  get preplan(){
+    return this.preplans.current_preplan;
   }
 
   ngOnInit() {

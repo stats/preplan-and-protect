@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 
 import { Preplan } from './models/preplan.model';
 
-import { cloneDeep } from 'lodash'
+import { cloneDeep } from 'lodash-es'
 import { saveAs } from 'file-saver';
 
 import DB from './mydatabase';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class PreplansService {
-
-  private preplanChangeSource:Subject<void> = new Subject<void>();
-  public preplanChange$ = this.preplanChangeSource.asObservable();
 
   public current_preplan_uuid:string;
   public preplans = {};
@@ -95,7 +90,6 @@ export class PreplansService {
 
   setPreplan(uuid) {
     this.current_preplan_uuid = uuid;
-    this.preplanChangeSource.next();
   }
 
   getPreplan(uuid) {
