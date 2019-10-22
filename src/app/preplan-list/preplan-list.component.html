@@ -1,52 +1,34 @@
-<div class="modal fade" data-keyboard="false" data-backdrop="static" id="preplans-list" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">All Preplans</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <div *ngIf="preplans.preplansSize == 0">
-          <p>You have not created any preplans.</p>
-        </div>
-        <div *ngIf="preplans.preplansSize > 0">
-          <div>
-            <p>You have created {{preplans.preplansSize}} preplan{{ preplans.preplansSize == 1 ? '': 's'}}.</p>
-          </div>
-          <table class="table table-striped table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Risk Rating</th>
-                <th scope="col">Author</th>
-                <th scope="col">Version</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let preplan of preplans.preplans | keyvalue" [ngClass]="preplan.value.version == 0 ? 'table-danger' : ''">
-                <td>{{preplan.value.name || 'No name entered'}}</td>
-                <td>{{preplan.value.shortAddress || 'No address entered'}}</td>
-                <td>{{preplan.value.shortRiskRating || 'No risk rating entered'}}</td>
-                <td>{{preplan.value.author}}</td>
-                <td>{{preplan.value.version == 0 ? 'Not yet saved' : preplan.value.version }}</td>
-                <td class="actions">
-                  <i class="fa fa-eye" data-toggle="tooltip" title="View Preplan" (click)="viewPreplan(preplan.key)"></i>
-                  <i class="fa fa-pencil" data-toggle="tooltip" title="Edit Preplan" (click)="editPreplan(preplan.key)"></i>
-                  <i class="fa fa-trash-o" data-toggle="tooltip" title="Delete Preplan" (click)="deletePreplan(preplan.key)"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-      </div>
-
-    </div>
+<div *ngIf="preplans.preplansSize == 0">
+  <p>You have not created any preplans.</p>
+</div>
+<div *ngIf="preplans.preplansSize > 0">
+  <div>
+    <p>You have created {{preplans.preplansSize}} preplan{{ preplans.preplansSize == 1 ? '': 's'}}.</p>
   </div>
+  <table class="table table-striped table-hover table-responsive-sm">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th class="d-none d-sm-table-cell" scope="col">Address</th>
+        <th class="d-none d-md-table-cell" scope="col">Risk Rating</th>
+        <th class="d-none d-md-table-cell" scope="col">Author</th>
+        <th class="d-none d-md-table-cell" scope="col">Version</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let preplan of preplans.preplans | keyvalue" [ngClass]="preplan.value.version == 0 ? 'table-danger' : ''">
+        <td>{{preplan.value.name || 'No name entered'}}</td>
+        <td class="d-none d-sm-table-cell" >{{preplan.value.shortAddress || 'No address entered'}}</td>
+        <td class="d-none d-md-table-cell">{{preplan.value.shortRiskRating || 'No risk rating entered'}}</td>
+        <td class="d-none d-md-table-cell">{{preplan.value.author}}</td>
+        <td class="d-none d-md-table-cell">{{preplan.value.version == 0 ? 'Not yet saved' : preplan.value.version }}</td>
+        <td class="actions">
+          <i class="fa fa-eye" data-toggle="tooltip" title="View Preplan" (click)="viewPreplan(preplan.key)"></i>
+          <i class="fa fa-pencil" data-toggle="tooltip" title="Edit Preplan" (click)="editPreplan(preplan.key)"></i>
+          <i class="fa fa-trash-o" data-toggle="tooltip" title="Delete Preplan" (click)="deletePreplan(preplan.key)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

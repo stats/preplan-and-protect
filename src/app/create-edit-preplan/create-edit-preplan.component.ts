@@ -42,19 +42,7 @@ export class CreateEditPreplanComponent implements OnInit {
   constructor(private preplans:PreplansService, private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
-    this.showModalRef = this.preplans.toggleCreateEdit$.subscribe(() => {
-      if(this.preplans.createEditVisible) {
-        $('#create-edit-preplan').modal('show');
-        if(!this.preplans.current_preplan) {
-          this.preplans.newPreplan();
-        }
-      } else {
-        $('#create-edit-preplan').modal('hide');
-      }
-    })
-
     this.loadComponent();
-
   }
 
   private loadComponent(){
@@ -86,8 +74,7 @@ export class CreateEditPreplanComponent implements OnInit {
 
   private viewReport() {
     this.preplans.savePreplan();
-    $('#create-edit-preplan').modal('hide');
-    $('#view-preplan').modal('show');
+    this.preplans.showViewPreplan();
   }
 
 }

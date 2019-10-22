@@ -1,143 +1,132 @@
-<div class="modal fade" data-keyboard="false" data-backdrop="static" id="view-preplan" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{preplan?.name}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="view-content">
-        <div class="row">
-          <div class="col-9">
-            <h1>{{preplan?.name}}</h1>
-            <h5 *ngIf="preplan && preplan.allAliases">Location aliases: {{preplan?.allAliases}}</h5>
-            <h5 *ngIf="preplan?.author">created by {{preplan?.author}}</h5>
-          </div>
-          <div class="col-3">
-            <div class="d-flex flex-row-reverse">
-              <div class="riskRating riskRating{{preplan?.riskCategory}}" *ngIf="preplan && preplan.riskRating != 0">
-                <div class="category">Risk Rating</div>
-                <div class="number">{{preplan?.riskRating}}</div>
-                <div class="category">{{preplan?.riskCategory}}</div>
-              </div>
-            </div>
-          </div>
+<div id="view-preplan">
+  <div class="row">
+    <div class="col-9">
+      <h1>{{preplan?.name}}</h1>
+      <h5 *ngIf="preplan && preplan.allAliases">Location aliases: {{preplan?.allAliases}}</h5>
+      <h5 *ngIf="preplan?.author">created by {{preplan?.author}}</h5>
+    </div>
+    <div class="col-3">
+      <div class="d-flex flex-row-reverse">
+        <div class="riskRating riskRating{{preplan?.riskCategory}}" *ngIf="preplan && preplan.riskRating != 0">
+          <div class="category">Risk Rating</div>
+          <div class="number">{{preplan?.riskRating}}</div>
+          <div class="category">{{preplan?.riskCategory}}</div>
         </div>
-
-        <div class="row" *ngIf="preplan?.openshaftway">
-          <div class="col-12 text-danger">Danger: Open shaftways in this structure</div>
-        </div>
-        <div class="row">
-          <div class="col-12 text-danger" *ngIf="preplan?.floorTruss && preplan?.roofTruss">Danger: Truss floors and roofs at this location</div>
-          <div class="col-12 text-warning" *ngIf="preplan?.floorTruss && !preplan?.roofTruss">Warning: Truss floors at this location</div>
-          <div class="col-12 text-warning" *ngIf="!preplan?.floorTruss && preplan?.roofTruss">Warning: Truss roofs at this location</div>
-        </div>
-
-        <div *ngIf="preplan?.address.anyComponents">
-          <h2>Location</h2>
-          <address>
-            {{preplan?.address.address}}<span *ngIf="preplan?.address.address1">, {{preplan?.address.address1}}</span><br>
-            {{preplan?.address.city}}<span *ngIf="preplan?.address.state">, {{preplan?.address.state}}</span> {{preplan?.address.zipcode}}
-          </address>
-        </div>
-
-        <p *ngIf="preplan?.constructionType"><strong>Building Construction:</strong> {{preplan?.constructionType}}</p>
-
-        <div *ngIf="preplan?.sprinkers || preplan?.standpipes || preplan?.keybox || preplan?.keyboxLocation || preplan?.elevators || preplan?.elevatorFireService">
-          <h3>Fire Protection</h3>
-
-          <ul>
-            <li *ngIf="preplan?.sprinklers">Site has sprinklers.</li>
-            <li *ngIf="preplan?.standpipe">Site has standpipes.</li>
-            <li *ngIf="preplan?.keybox || preplan?.keyboxLocation">
-              Site has a keybox<span *ngIf="preplan?.keyboxLocation"> located at {{preplan?.keyboxLocation}}</span>.
-            </li>
-            <li *ngIf="preplan?.elevators || preplan?.elevatorsFireService">
-              Site has elevators<span *ngIf="preplan?.elevatorsFireService"> with fire service mode</span>.
-            </li>
-          </ul>
-        </div>
-
-        <div *ngIf="preplan?.fireflows.length > 0">
-          <h2>Fire Flow</h2>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Percent Involvement</th>
-                <th scope="col">25%</th>
-                <th scope="col">50%</th>
-                <th scope="col">75%</th>
-                <th scope="col">100%</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let flow of preplan?.fireflows">
-                <td>{{flow.name}}</td>
-                <td>{{ (flow.squareFootage / 3) * 0.25 | number: '1.0-0'}} GPM</td>
-                <td>{{ (flow.squareFootage / 3) * 0.50 | number: '1.0-0'}} GPM</td>
-                <td>{{ (flow.squareFootage / 3) * 0.75 | number: '1.0-0'}} GPM</td>
-                <td>{{ (flow.squareFootage / 3) | number: '1.0-0'}} GPM</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div *ngIf="preplan?.contacts.length > 0">
-          <h2>Contacts</h2>
-          <div class="row" *ngFor="let contact of preplan?.contacts">
-            <div class="col-4">
-              {{contact.name}}<br>
-              <a href="mailto:{{contact.email}}">{{contact.email}}</a>
-            </div>
-            <div class="col-4">
-              <div *ngFor="let phone of contact.phones">
-                {{phone.type}} {{phone.number}}
-              </div>
-            </div>
-            <div class="col-4">
-              <address>
-                {{contact.address.address}}<span *ngIf="contact.address.address1">, {{contact.address.address1}}</span><br>
-                {{contact.address.city}}<span *ngIf="contact.address.state">, {{contact.address.state}}</span> {{contact.address.zipcode}}
-              </address>
-            </div>
-          </div>
-        </div>
-
-        <div *ngIf="preplan?.hazards.length > 0">
-          <h2>Hazards</h2>
-          <div *ngFor="let hazard of preplan?.hazards">
-            <h5>{{hazard.type}}</h5>
-            <p>{{hazard.description}}</p>
-          </div>
-        </div>
-
-        <div *ngIf="preplan?.images.length > 0">
-          <h2>Images</h2>
-          <figure class="figure" *ngFor="let image of preplan?.images">
-            <img [src]="preplans.getImage(image.dexie_id)" class="img-fluid" alt="{{image.name}}: {{image.description}}">
-            <figcaption class="figure-caption"><strong>{{image.name}}:</strong> {{image.description}}</figcaption>
-          </figure>
-        </div>
-
-        <div class="footer-content" data-html2canvas-ignore="true">
-          <hr>
-          <div class="d-flex justify-content-between">
-            <div>
-              created<br>{{preplan?.created | date: 'short' }}
-            </div>
-            <div class="text-center">
-                version<br>{{preplan?.version}}
-            </div>
-            <div class="text-right">
-              updated<br>{{preplan?.updated | date: 'short' }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-primary" (click)="createPDF()">Download PDF</button>
       </div>
     </div>
   </div>
+
+  <div class="row" *ngIf="preplan?.openshaftway">
+    <div class="col-12 text-danger">Danger: Open shaftways in this structure</div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-danger" *ngIf="preplan?.floorTruss && preplan?.roofTruss">Danger: Truss floors and roofs at this location</div>
+    <div class="col-12 text-warning" *ngIf="preplan?.floorTruss && !preplan?.roofTruss">Warning: Truss floors at this location</div>
+    <div class="col-12 text-warning" *ngIf="!preplan?.floorTruss && preplan?.roofTruss">Warning: Truss roofs at this location</div>
+  </div>
+
+  <div *ngIf="preplan?.address.anyComponents">
+    <h2>Location</h2>
+    <address>
+      {{preplan?.address.address}}<span *ngIf="preplan?.address.address1">, {{preplan?.address.address1}}</span><br>
+      {{preplan?.address.city}}<span *ngIf="preplan?.address.state">, {{preplan?.address.state}}</span> {{preplan?.address.zipcode}}
+    </address>
+  </div>
+
+  <p *ngIf="preplan?.constructionType"><strong>Building Construction:</strong> {{preplan?.constructionType}}</p>
+
+  <div *ngIf="preplan?.sprinkers || preplan?.standpipes || preplan?.keybox || preplan?.keyboxLocation || preplan?.elevators || preplan?.elevatorFireService">
+    <h3>Fire Protection</h3>
+
+    <ul>
+      <li *ngIf="preplan?.sprinklers">Site has sprinklers.</li>
+      <li *ngIf="preplan?.standpipe">Site has standpipes.</li>
+      <li *ngIf="preplan?.keybox || preplan?.keyboxLocation">
+        Site has a keybox<span *ngIf="preplan?.keyboxLocation"> located at {{preplan?.keyboxLocation}}</span>.
+      </li>
+      <li *ngIf="preplan?.elevators || preplan?.elevatorsFireService">
+        Site has elevators<span *ngIf="preplan?.elevatorsFireService"> with fire service mode</span>.
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="preplan?.fireflows.length > 0">
+    <h2>Fire Flow</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Percent Involvement</th>
+          <th scope="col">25%</th>
+          <th scope="col">50%</th>
+          <th scope="col">75%</th>
+          <th scope="col">100%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flow of preplan?.fireflows">
+          <td>{{flow.name}}</td>
+          <td>{{ (flow.squareFootage / 3) * 0.25 | number: '1.0-0'}} GPM</td>
+          <td>{{ (flow.squareFootage / 3) * 0.50 | number: '1.0-0'}} GPM</td>
+          <td>{{ (flow.squareFootage / 3) * 0.75 | number: '1.0-0'}} GPM</td>
+          <td>{{ (flow.squareFootage / 3) | number: '1.0-0'}} GPM</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="preplan?.contacts.length > 0">
+    <h2>Contacts</h2>
+    <div class="row" *ngFor="let contact of preplan?.contacts">
+      <div class="col-4">
+        {{contact.name}}<br>
+        <a href="mailto:{{contact.email}}">{{contact.email}}</a>
+      </div>
+      <div class="col-4">
+        <div *ngFor="let phone of contact.phones">
+          {{phone.type}} {{phone.number}}
+        </div>
+      </div>
+      <div class="col-4">
+        <address>
+          {{contact.address.address}}<span *ngIf="contact.address.address1">, {{contact.address.address1}}</span><br>
+          {{contact.address.city}}<span *ngIf="contact.address.state">, {{contact.address.state}}</span> {{contact.address.zipcode}}
+        </address>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="preplan?.hazards.length > 0">
+    <h2>Hazards</h2>
+    <div *ngFor="let hazard of preplan?.hazards">
+      <h5>{{hazard.type}}</h5>
+      <p>{{hazard.description}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="preplan?.images.length > 0">
+    <h2>Images</h2>
+    <figure class="figure" *ngFor="let image of preplan?.images">
+      <img [src]="preplans.getImage(image.dexie_id)" class="img-fluid" alt="{{image.name}}: {{image.description}}">
+      <figcaption class="figure-caption"><strong>{{image.name}}:</strong> {{image.description}}</figcaption>
+    </figure>
+  </div>
 </div>
+
+<div class="footer-content">
+  <hr>
+  <div class="d-flex justify-content-between">
+    <div>
+      created<br>{{preplan?.created | date: 'short' }}
+    </div>
+    <div class="text-center">
+        version<br>{{preplan?.version}}
+    </div>
+    <div class="text-right">
+      updated<br>{{preplan?.updated | date: 'short' }}
+    </div>
+  </div>
+</div>
+
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-primary">
+  <button type="button" class="btn btn-success" (click)="createPDF()">Download PDF</button>
+</nav>

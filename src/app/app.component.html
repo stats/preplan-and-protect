@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
-<app-home-content></app-home-content>
 
-<app-create-edit-preplan></app-create-edit-preplan>
-<app-view-preplan></app-view-preplan>
-<app-preplan-list></app-preplan-list>
+<div class="page container-fluid">
+  <app-home-content *ngIf="preplans.homeVisible"></app-home-content>
+  <app-create-edit-preplan *ngIf="preplans.createEditVisible"></app-create-edit-preplan>
+  <app-view-preplan *ngIf="preplans.viewPreplanVisible"></app-view-preplan>
+  <app-preplan-list *ngIf="preplans.preplanListVisible"></app-preplan-list>
+</div>

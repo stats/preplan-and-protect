@@ -1,23 +1,12 @@
-<div class="modal fade" data-keyboard="false" data-backdrop="static" id="create-edit-preplan" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">{{section_title}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item" *ngFor="let step of steps; let i = index;"><a class="nav-link" [ngClass]="current_step == i ? 'active' : ''" role="tab" href="javascript:void(0)" [attr.aria-selected]="current_step == i ? 'true' : 'false'" (click)="setStep(i)">{{step.title}}</a></li>
-        </ul>
-        <ng-template section-content></ng-template>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-primary" [disabled]="current_step == 0" (click)="back()">Back</button>
-        <button type="button" class="btn btn-success" (click)="viewReport()">Save and View Preplan</button>
-        <button type="button" class="btn btn-primary"[disabled]="current_step == steps.length - 1" (click)="next()">Next</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item" *ngFor="let step of steps; let i = index;"><a class="nav-link" [ngClass]="current_step == i ? 'active' : ''" role="tab" href="javascript:void(0)" [attr.aria-selected]="current_step == i ? 'true' : 'false'" (click)="setStep(i)">{{step.title}}</a></li>
+</ul>
+
+<ng-template section-content></ng-template>
+
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-dark bg-primary justify-content-between">
+  <button type="button" class="btn btn-secondary" [disabled]="current_step == 0" (click)="back()">Back</button>
+  <button type="button" class="btn btn-success" (click)="viewReport()">Save and View Preplan</button>
+  <button type="button" class="btn btn-secondary" [disabled]="current_step == steps.length - 1" (click)="next()">Next</button>
+</nav>

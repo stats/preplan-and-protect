@@ -27,7 +27,7 @@ export class ViewPreplanComponent implements OnInit {
   }
 
   createPDF() {
-    html2pdf().from(document.getElementById('view-content')).set({
+    html2pdf().from(document.getElementById('view-preplan')).set({
       margin: [0.25, 0.25, 0.4, 0.25],
       filename: 'test.pdf',
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },

@@ -20,7 +20,7 @@
         <input type="text" class="form-control" id="number[{{i}}][{{j}}]" name="number[{{i}}][{{j}}]" [(ngModel)]="preplans.current_preplan && preplans.current_preplan.contacts[i].phones[j].number" placeholder="Enter the phone number"/>
       </div>
     </fieldset>
-    <div class="row">
+    <div class="row pt-2">
       <div class="col-lg-12">
         <button type="button" class="btn btn-outline-secondary float-right" (click)="addPhone(i)">+ add a phone</button>
       </div>
@@ -48,7 +48,7 @@
       </div>
     </div>
   </fieldset>
-  <div class="row">
+  <div class="row pt-2">
     <div class="col-lg-12">
       <button type="button" class="btn btn-outline-secondary float-right" (click)="addContact()">+ add a contact</button>
     </div>

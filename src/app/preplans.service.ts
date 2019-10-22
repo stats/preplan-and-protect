@@ -10,14 +10,14 @@ import DB from './mydatabase';
 })
 export class PreplansService {
 
-  public createEditVisible:boolean = false;
-  public preplanListVisible:boolean = false;
-
-  private showCreateEditSource:Subject<void> = new Subject<void>();
-  public toggleCreateEdit$ = this.showCreateEditSource.asObservable();
-
-  private showPreplanListSource:Subject<void> = new Subject<void>();
-  public togglePreplanList$ = this.showPreplanListSource.asObservable();
+  // public createEditVisible:boolean = false;
+  // public preplanListVisible:boolean = false;
+  //
+  // private showCreateEditSource:Subject<void> = new Subject<void>();
+  // public toggleCreateEdit$ = this.showCreateEditSource.asObservable();
+  //
+  // private showPreplanListSource:Subject<void> = new Subject<void>();
+  // public togglePreplanList$ = this.showPreplanListSource.asObservable();
 
   private preplanChangeSource:Subject<void> = new Subject<void>();
   public preplanChange$ = this.preplanChangeSource.asObservable();
@@ -26,6 +26,35 @@ export class PreplansService {
   public preplans = {};
 
   public image_cache = {};
+
+  public homeVisible = true;
+  public createEditVisible = false;
+  public viewPreplanVisible = false;
+  public preplanListVisible = false;
+
+  private hideAll(){
+    this.homeVisible = this.createEditVisible = this.viewPreplanVisible = this.preplanListVisible = false;
+  }
+
+  showHome() {
+    this.hideAll();
+    this.homeVisible = true;
+  }
+
+  showCreateEdit() {
+    this.hideAll();
+    this.createEditVisible = true;
+  }
+
+  showViewPreplan() {
+    this.hideAll();
+    this.viewPreplanVisible = true;
+  }
+
+  showPreplanList() {
+    this.hideAll();
+    this.preplanListVisible = true;
+  }
 
   public get current_preplan() {
     return this.preplans[this.current_preplan_uuid];
@@ -58,15 +87,6 @@ export class PreplansService {
   getImage(id) {
     return this.image_cache[id];
   }
-
-
-  // async getImage(id) {
-  //   if(this.image_cache[id]) return this.image_cache[id];
-  //   console.log(id, this.image_cache[id]);
-  //   let image = await DB.images.get(id)
-  //   this.image_cache[id] = image.data;
-  //   return this.image_cache[id];
-  // }
 
   get preplansSize() {
     return Object.keys(this.preplans).length || 0;
@@ -113,24 +133,24 @@ export class PreplansService {
     localStorage.removeItem(`preplan_${uuid}`);
   }
 
-  showCreateEdit(){
-    this.createEditVisible = true;
-    this.showCreateEditSource.next();
-  }
-
-  hideCreateEdit() {
-    this.createEditVisible = false;
-    this.showCreateEditSource.next();
-  }
-
-  showPreplansList() {
-    this.preplanListVisible = true;
-    this.showPreplanListSource.next();
-  }
-
-  hidePreplansList() {
-    this.preplanListVisible = false;
-    this.showPreplanListSource.next();
-  }
+  // showCreateEdit(){
+  //   this.createEditVisible = true;
+  //   this.showCreateEditSource.next();
+  // }
+  //
+  // hideCreateEdit() {
+  //   this.createEditVisible = false;
+  //   this.showCreateEditSource.next();
+  // }
+  //
+  // showPreplansList() {
+  //   this.preplanListVisible = true;
+  //   this.showPreplanListSource.next();
+  // }
+  //
+  // hidePreplansList() {
+  //   this.preplanListVisible = false;
+  //   this.showPreplanListSource.next();
+  // }
 
 }

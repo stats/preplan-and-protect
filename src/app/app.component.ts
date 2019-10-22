@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PreplansService } from './preplans.service'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'preplan-and-protect';
+
+  constructor(private preplans:PreplansService){
+
+  }
 }

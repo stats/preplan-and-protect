@@ -19,25 +19,16 @@ export class PreplanListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showModalRef = this.preplans.togglePreplanList$.subscribe(() => {
-      if(this.preplans.preplanListVisible) {
-        $('#preplans-list').modal('show');
-      } else {
-        $('#preplans-list').modal('hide');
-      }
-    })
   }
 
   viewPreplan(uuid) {
     this.preplans.setPreplan(uuid);
-    $('#preplans-list').modal('hide');
-    $('#view-preplan').modal('show');
+    this.preplans.showViewPreplan();
   }
 
   editPreplan(uuid) {
     this.preplans.setPreplan(uuid);
-    $('#preplans-list').modal('hide');
-    $('#create-edit-preplan').modal('show');
+    this.preplans.showCreateEdit();
   }
 
   deletePreplan(uuid) {
