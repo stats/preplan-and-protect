@@ -3,21 +3,16 @@ import { Subject } from 'rxjs';
 
 import { Preplan } from './models/preplan.model';
 
+import { cloneDeep } from 'lodash'
+import { saveAs } from 'file-saver';
+
 import DB from './mydatabase';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PreplansService {
-
-  // public createEditVisible:boolean = false;
-  // public preplanListVisible:boolean = false;
-  //
-  // private showCreateEditSource:Subject<void> = new Subject<void>();
-  // public toggleCreateEdit$ = this.showCreateEditSource.asObservable();
-  //
-  // private showPreplanListSource:Subject<void> = new Subject<void>();
-  // public togglePreplanList$ = this.showPreplanListSource.asObservable();
 
   private preplanChangeSource:Subject<void> = new Subject<void>();
   public preplanChange$ = this.preplanChangeSource.asObservable();
@@ -31,9 +26,10 @@ export class PreplansService {
   public createEditVisible = false;
   public viewPreplanVisible = false;
   public preplanListVisible = false;
+  public restoreVisible = false;
 
   private hideAll(){
-    this.homeVisible = this.createEditVisible = this.viewPreplanVisible = this.preplanListVisible = false;
+    this.homeVisible = this.createEditVisible = this.viewPreplanVisible = this.preplanListVisible = this.restoreVisible = false;
   }
 
   showHome() {
@@ -54,6 +50,11 @@ export class PreplansService {
   showPreplanList() {
     this.hideAll();
     this.preplanListVisible = true;
+  }
+
+  showRestore() {
+    this.hideAll();
+    this.restoreVisible = true;
   }
 
   public get current_preplan() {
@@ -129,28 +130,61 @@ export class PreplansService {
   }
 
   deletePreplan(uuid) {
+    let preplan = this.preplans[uuid];
+    for(let image of preplan.images){
+      DB.images.delete(image.dexie_id).then(result => {
+        console.log('Image Delete');
+      });
+      delete this.image_cache[image.dexie_id];
+    }
     delete this.preplans[uuid];
     localStorage.removeItem(`preplan_${uuid}`);
   }
 
-  // showCreateEdit(){
-  //   this.createEditVisible = true;
-  //   this.showCreateEditSource.next();
-  // }
-  //
-  // hideCreateEdit() {
-  //   this.createEditVisible = false;
-  //   this.showCreateEditSource.next();
-  // }
-  //
-  // showPreplansList() {
-  //   this.preplanListVisible = true;
-  //   this.showPreplanListSource.next();
-  // }
-  //
-  // hidePreplansList() {
-  //   this.preplanListVisible = false;
-  //   this.showPreplanListSource.next();
-  // }
+  backupAll() {
+    let preplans = cloneDeep(this.preplans);
+    for(let key in preplans) {
+      let preplan = preplans[key];
+      for(let image of preplan.images){
+        image["data"] = this.image_cache[image.dexie_id];
+      }
+    }
+    var blob = new Blob([JSON.stringify(preplans)], {type : 'application/json'});
+    saveAs(blob, "PreplanAndProtect_backup.json")
+  }
+
+  async restore(file) {
+    let results:any = await this.open_restore_file(file);
+    await DB.images.clear();
+    localStorage.clear();
+
+    for(let key in results) {
+      let preplan_json = results[key];
+      for(let image of preplan_json.images) {
+        var id = await DB.images.put({data: image.data});
+        image.dexie_id = id;
+        delete image["data"];
+      }
+      localStorage.setItem(`preplan_${key}`, JSON.stringify(preplan_json));
+    }
+
+    this.loadPreplans();
+  }
+
+  async open_restore_file(file:File) {
+    let reader = new FileReader();
+
+    return new Promise((resolve, reject) => {
+      reader.onerror = () => {
+        reader.abort();
+        reject(new DOMException("Problem parsing restore file."));
+      }
+
+      reader.onloadend = (e) => {
+        resolve(JSON.parse(reader.result as string));
+      }
+      reader.readAsText(file);
+    });
+  }
 
 }

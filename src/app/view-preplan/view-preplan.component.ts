@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PreplansService } from '../preplans.service';
 
-// import * as jsPDF from 'jspdf';
-// import * as html2canvas from 'html2canvas';
-
 declare var html2pdf:any;
 
 @Component({

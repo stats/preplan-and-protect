@@ -1,0 +1,15 @@
+<p>Upload a backup file to restore your saved data.</p>
+
+<p class="text-danger">Danger: Restoring from backup will overwrite all current data.</p>
+
+<form>
+  <div class="form-group">
+    <label for="backup_file">Backup File</label>
+    <input type="file" class="form-control-file" id="backup_file" name="backup_file">
+  </div>
+  <div class="row pt-2">
+    <div class="col-12">
+      <button type="button" class="btn btn-danger" (click)="restore()">Restore from Backup</button>
+    </div>
+  </div>
+</form>

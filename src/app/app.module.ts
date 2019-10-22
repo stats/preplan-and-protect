@@ -17,6 +17,7 @@ import { ImagesComponent } from './create-edit-preplan/images/images.component';
 import { ViewPreplanComponent } from './view-preplan/view-preplan.component';
 import { PreplanListComponent } from './preplan-list/preplan-list.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
+import { RestoreComponent } from './restore/restore.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     ImagesComponent,
     ViewPreplanComponent,
     PreplanListComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    RestoreComponent
   ],
   imports: [
     BrowserModule,
