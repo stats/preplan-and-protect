@@ -11,7 +11,7 @@ export class RestoreComponent implements OnInit {
 
   public backupFile;
 
-  constructor(private preplans:PreplansService) { }
+  constructor(public preplans:PreplansService) { }
 
   ngOnInit() {
   }

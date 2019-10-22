@@ -9,7 +9,7 @@ import { Hazard } from '../../models/hazard.model';
 })
 export class HazardsComponent implements OnInit {
 
-  constructor(private preplans:PreplansService) { }
+  constructor(public preplans:PreplansService) { }
 
   ngOnInit() {
   }

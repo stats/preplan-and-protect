@@ -10,7 +10,7 @@ import { Phone } from '../../models/phone.model';
 })
 export class ContactsComponent implements OnInit {
 
-  constructor(private preplans:PreplansService) { }
+  constructor(public preplans:PreplansService) { }
 
   ngOnInit() {
   }

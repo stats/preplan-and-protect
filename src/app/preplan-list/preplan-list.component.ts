@@ -15,7 +15,7 @@ export class PreplanListComponent implements OnInit {
 
   private showModalRef:Subscription = null;
 
-  constructor(private preplans:PreplansService) {
+  constructor(public preplans:PreplansService) {
   }
 
   ngOnInit() {

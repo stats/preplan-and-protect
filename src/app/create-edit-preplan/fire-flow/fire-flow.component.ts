@@ -9,7 +9,7 @@ import { FireFlow } from '../../models/fireflow.model';
 })
 export class FireFlowComponent implements OnInit {
 
-  constructor(private preplans:PreplansService) { }
+  constructor(public preplans:PreplansService) { }
 
   ngOnInit() {
   }

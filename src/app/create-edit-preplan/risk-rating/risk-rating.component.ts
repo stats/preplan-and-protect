@@ -8,7 +8,7 @@ import { PreplansService } from '../../preplans.service';
 })
 export class RiskRatingComponent implements OnInit {
 
-  constructor(private preplans:PreplansService) { }
+  constructor(public preplans:PreplansService) { }
 
   ngOnInit() {
   }

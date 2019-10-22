@@ -9,7 +9,7 @@ import { PreplansService } from './preplans.service'
 export class AppComponent {
   title = 'preplan-and-protect';
 
-  constructor(private preplans:PreplansService){
+  constructor(public preplans:PreplansService){
 
   }
 }

@@ -39,7 +39,7 @@ export class CreateEditPreplanComponent implements OnInit {
 
   @ViewChild(SectionContentDirective, {static: true}) sectionContent:SectionContentDirective;
 
-  constructor(private preplans:PreplansService, private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(public preplans:PreplansService, private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
     this.loadComponent();

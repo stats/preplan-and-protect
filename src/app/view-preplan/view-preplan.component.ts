@@ -12,7 +12,7 @@ export class ViewPreplanComponent implements OnInit {
 
   preplan:any;
 
-  constructor(private preplans:PreplansService) {
+  constructor(public preplans:PreplansService) {
     this.preplan = this.preplans.current_preplan;
 
     this.preplans.preplanChange$.subscribe(() => {

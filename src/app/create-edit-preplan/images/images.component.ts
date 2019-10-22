@@ -10,7 +10,7 @@ import DB from '../../mydatabase';
 })
 export class ImagesComponent implements OnInit, AfterViewInit {
 
-  constructor(private preplans:PreplansService) {
+  constructor(public preplans:PreplansService) {
 
   }
 
