@@ -75,7 +75,6 @@ export class PreplansService {
   setPreplan(uuid) {
     this.current_preplan_uuid = uuid;
     this.preplanChangeSource.next();
-    console.log(this.current_preplan);
   }
 
   getPreplan(uuid) {
@@ -97,6 +96,14 @@ export class PreplansService {
     if(!this.preplans[preplan.uuid]) {
       this.preplans[preplan.uuid] = preplan;
     }
+
+    for(let image of preplan.images) {
+      this.cache_image(image.dexie_id).then(result => {
+        console.log('Cache Complete', result);
+      });
+    }
+
+    this.setPreplan(preplan.uuid);
 
     localStorage.setItem(`preplan_${preplan.uuid}`, JSON.stringify(preplan));
   }

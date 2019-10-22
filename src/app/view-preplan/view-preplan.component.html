@@ -12,7 +12,7 @@
           <div class="col-9">
             <h1>{{preplan?.name}}</h1>
             <h5 *ngIf="preplan && preplan.allAliases">Location aliases: {{preplan?.allAliases}}</h5>
-            <h5>created by {{preplan?.author}}</h5>
+            <h5 *ngIf="preplan?.author">created by {{preplan?.author}}</h5>
           </div>
           <div class="col-3">
             <div class="d-flex flex-row-reverse">
@@ -34,13 +34,15 @@
           <div class="col-12 text-warning" *ngIf="!preplan?.floorTruss && preplan?.roofTruss">Warning: Truss roofs at this location</div>
         </div>
 
-        <h2>Location</h2>
-        <address>
-          {{preplan?.address.address}}<span *ngIf="preplan?.address.address1">, {{preplan?.address.address1}}</span><br>
-          {{preplan?.address.city}}<span *ngIf="preplan?.address.state">, {{preplan?.address.state}}</span> {{preplan?.address.zipcode}}
-        </address>
+        <div *ngIf="preplan?.address.anyComponents">
+          <h2>Location</h2>
+          <address>
+            {{preplan?.address.address}}<span *ngIf="preplan?.address.address1">, {{preplan?.address.address1}}</span><br>
+            {{preplan?.address.city}}<span *ngIf="preplan?.address.state">, {{preplan?.address.state}}</span> {{preplan?.address.zipcode}}
+          </address>
+        </div>
 
-        <p><strong>Building Construction:</strong> {{preplan?.constructionType}}</p>
+        <p *ngIf="preplan?.constructionType"><strong>Building Construction:</strong> {{preplan?.constructionType}}</p>
 
         <div *ngIf="preplan?.sprinkers || preplan?.standpipes || preplan?.keybox || preplan?.keyboxLocation || preplan?.elevators || preplan?.elevatorFireService">
           <h3>Fire Protection</h3>
@@ -113,7 +115,7 @@
         <div *ngIf="preplan?.images.length > 0">
           <h2>Images</h2>
           <figure class="figure" *ngFor="let image of preplan?.images">
-            <img [src]="preplans.getImage(image.dexie_id)" class="img-responsive" alt="{{image.name}}: {{image.description}}">
+            <img [src]="preplans.getImage(image.dexie_id)" class="img-fluid" alt="{{image.name}}: {{image.description}}">
             <figcaption class="figure-caption"><strong>{{image.name}}:</strong> {{image.description}}</figcaption>
           </figure>
         </div>

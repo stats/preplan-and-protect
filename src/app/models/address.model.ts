@@ -11,4 +11,8 @@ export class Address {
 
     return this;
   }
+
+  public get anyComponents():boolean {
+    return this.address || this.address2 || this.city || this.state || this.zipcode;
+  }
 }
